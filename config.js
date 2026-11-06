@@ -4,7 +4,7 @@ module.exports = {
   ownerName: "SUJON",
   // Tomar WhatsApp number - 880 diye, + chara
   // Example: 8801712345678
-  ownerNumber: "8801XXXXXXXXX",
+  ownerNumber: "8801339977150",
   prefix: ".",
   // Auto reply on/off
   autoRead: true,
