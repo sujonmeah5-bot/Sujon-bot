@@ -11,6 +11,11 @@ async function startBot() {
     auth: state,
     browser: ["SUJON - BOT", "Chrome", "1.0"]
   })
+// Pairing Code
+  if (!sock.authState.creds.registered) {
+    const code = await sock.requestPairingCode(config.ownerNumber)
+    console.log("PAIRING CODE:", code)
+  }
 
   sock.ev.on("creds.update", saveCreds)
 
