@@ -7,7 +7,7 @@ async function startBot() {
   const { state, saveCreds } = await useMultiFileAuthState("session")
   const sock = makeWASocket({
     logger: pino({ level: "silent" }),
-    printQRInTerminal: true,
+    printQRInTerminal: false,
     auth: state,
     browser: ["SUJON - BOT", "Chrome", "1.0"]
   })
