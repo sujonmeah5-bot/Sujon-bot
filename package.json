@@ -1,0 +1,17 @@
+{
+  "name": "sujon-bot",
+  "version": "1.0.0",
+  "description": "SUJON - BOT WhatsApp Bot",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.0",
+    "pino": "^8.19.0",
+    "axios": "^1.7.0",
+    "fs-extra": "^11.2.0",
+    "qrcode-terminal": "^0.12.0"
+  }
+}
