@@ -44,3 +44,6 @@ async function startBot() {
 }
 
 startBot()
+SCAN_QR_START
+2@... (onek boro line)
+SCAN_QR_END
