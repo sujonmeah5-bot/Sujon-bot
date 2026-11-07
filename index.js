@@ -26,6 +26,13 @@ sock.ev.on("connection.update", async (update) => {
     }, 3000)
   }
 })
+if (shouldReconnect) {
+  if (!sock.authState.creds.registered) {
+    console.log("Waiting for pairing, not restarting...")
+    return
+  }
+  startBot()
+}
   sock.ev.on("creds.update", saveCreds)
 
   sock.ev.on("connection.update", (update) => {
