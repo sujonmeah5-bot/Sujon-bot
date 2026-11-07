@@ -40,8 +40,7 @@ sock.ev.on("connection.update", async (update) => {
   console.log("Waiting for pairing, retry in 15 sec...")
   setTimeout(() => startBot(), 15000)
   return
-}
-        return
+return
       }
       if (statusCode !== DisconnectReason.loggedOut) {
         startBot()
