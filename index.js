@@ -21,7 +21,7 @@ if (!sock.authState.creds.registered) {
     } catch(e) {
       console.log("Pairing error:", e.message)
     }
-  }
+}
 sock.ev.on("connection.update", async (update) => {
   sock.ev.on("connection.update", async (update) => {
     const { connection, lastDisconnect, qr } = update
@@ -36,8 +36,11 @@ sock.ev.on("connection.update", async (update) => {
       const statusCode = lastDisconnect?.error?.output?.statusCode
       console.log("Connection closed, code:", statusCode)
       // Jodi pairing na hoye thake, taile restart korba NA - socket ke beche thakte dao
-      if (!sock.authState.creds.registered) {
-        console.log("Waiting for pairing... socket alive, restart korbo na")
+   if (!sock.authState.creds.registered) {
+  console.log("Waiting for pairing, retry in 15 sec...")
+  setTimeout(() => startBot(), 15000)
+  return
+}
         return
       }
       if (statusCode !== DisconnectReason.loggedOut) {
