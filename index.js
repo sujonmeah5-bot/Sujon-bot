@@ -16,11 +16,8 @@ async function startBot() {
   sock.ev.on("connection.update", async (update) => {
     const { connection, lastDisconnect } = update
 
-   if (!sock.authState.creds.registered) {
-  console.log("Waiting for pairing, retry in 15 sec...")
-  setTimeout(() => startBot(), 15000)
-  return
-}
+    if (connection === "connecting" && !sock.authState.creds.registered && !pairingDone) {
+      pairingDone = true
       setTimeout(async () => {
         try {
           const code = await sock.requestPairingCode(config.ownerNumber)
@@ -37,7 +34,8 @@ async function startBot() {
       console.log("Connection closed, reconnecting:", shouldReconnect)
       if (shouldReconnect) {
         if (!sock.authState.creds.registered) {
-          console.log("Waiting for pairing, not restarting...")
+          console.log("Waiting for pairing, retry in 15 sec...")
+          setTimeout(() => startBot(), 15000)
           return
         }
         startBot()
