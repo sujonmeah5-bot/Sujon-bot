@@ -14,7 +14,14 @@ async function startBot() {
     auth: state,
     browser: ["SUJON - BOT", "Chrome", "1.0"]
   })
-
+if (!sock.authState.creds.registered) {
+    try {
+      const code = await sock.requestPairingCode("8801339977150")
+      console.log("PAIRING CODE:", code)
+    } catch(e) {
+      console.log("Pairing error:", e.message)
+    }
+  }
   sock.ev.on("connection.update", async (update) => {
     const { connection, lastDisconnect, qr } = update
 
