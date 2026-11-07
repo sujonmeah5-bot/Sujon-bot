@@ -1,6 +1,10 @@
 const { default: makeWASocket, useMultiFileAuthState, DisconnectReason } = require("@whiskeysockets/baileys")
 const pino = require("pino")
 const config = require("./config")
+const http = require("http")
+
+// Render ke beche rakhar jonno - eita na thakle Render bot ke mere dey
+http.createServer((req, res) => res.end("SUJON - BOT is running")).listen(process.env.PORT || 3000)
 
 async function startBot() {
   const { state, saveCreds } = await useMultiFileAuthState("session")
@@ -11,33 +15,34 @@ async function startBot() {
     browser: ["SUJON - BOT", "Chrome", "1.0"]
   })
 
-  let pairingDone = false
+  let pairingRequested = false
 
   sock.ev.on("connection.update", async (update) => {
     const { connection, lastDisconnect } = update
 
-    if (connection === "connecting" && !sock.authState.creds.registered && !pairingDone) {
-      pairingDone = true
+    if (connection === "connecting" && !sock.authState.creds.registered && !pairingRequested) {
+      pairingRequested = true
       setTimeout(async () => {
         try {
           const code = await sock.requestPairingCode(config.ownerNumber)
           console.log("PAIRING CODE:", code)
+          console.log("Ebar code ta WhatsApp e boshau, bot ar restart hobe na!")
         } catch (e) {
           console.log("Pairing failed:", e.message)
-          pairingDone = false
+          pairingRequested = false
         }
       }, 3000)
     }
 
     if (connection === "close") {
-      const shouldReconnect = lastDisconnect?.error?.output?.statusCode !== DisconnectReason.loggedOut
-      console.log("Connection closed, reconnecting:", shouldReconnect)
-      if (shouldReconnect) {
-        if (!sock.authState.creds.registered) {
-          console.log("Waiting for pairing, retry in 15 sec...")
-          setTimeout(() => startBot(), 15000)
-          return
-        }
+      const statusCode = lastDisconnect?.error?.output?.statusCode
+      console.log("Connection closed, code:", statusCode)
+      // Jodi pairing na hoye thake, taile restart korba NA - socket ke beche thakte dao
+      if (!sock.authState.creds.registered) {
+        console.log("Waiting for pairing... socket alive, restart korbo na")
+        return
+      }
+      if (statusCode !== DisconnectReason.loggedOut) {
         startBot()
       }
     } else if (connection === "open") {
