@@ -15,7 +15,7 @@ async function startBot() {
     browser: ["SUJON - BOT", "Chrome", "1.0"]
   })
 
-  let pairingRequested = false
+  let pairingRequested = true.
 
   sock.ev.on("connection.update", async (update) => {
     const { connection, lastDisconnect } = update
