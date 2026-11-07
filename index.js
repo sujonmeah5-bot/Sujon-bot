@@ -22,16 +22,7 @@ if (!sock.authState.creds.registered) {
       console.log("Pairing error:", e.message)
     }
   }
-if (!sock.authState.creds.registered) {
-  console.log(
-"Waiting for pairing... socket alive, restart korbo na")
-    return
-}
-if (!sock.authState.creds.registered) {
-  console.log("Waiting for pairing, retry in 15 sec...")
-  setTimeout(() => startBot(), 15000)
-  return
-}
+sock.ev.on("connection.update", async (update) => {
   sock.ev.on("connection.update", async (update) => {
     const { connection, lastDisconnect, qr } = update
 
