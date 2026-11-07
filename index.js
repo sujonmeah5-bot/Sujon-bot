@@ -11,18 +11,21 @@ async function startBot() {
     auth: state,
     browser: ["SUJON - BOT", "Chrome", "1.0"]
   })
-// Pairing Code
-if (!sock.authState.creds.registered) {
-  setTimeout(async () => {
-    try {
-      const code = await sock.requestPairingCode(config.ownerNumber)
-      console.log("PAIRING CODE:", code)
-    } catch (e) {
-      console.log("Pairing failed:", e.message)
-    }
-  }, 8000)
-}
-
+let pairingDone = false
+sock.ev.on("connection.update", async (update) => {
+  if (update.connection === "connecting" && !sock.authState.creds.registered && !pairingDone) {
+    pairingDone = true
+    setTimeout(async () => {
+      try {
+        const code = await sock.requestPairingCode(config.ownerNumber)
+        console.log("PAIRING CODE:", code)
+      } catch (e) {
+        console.log("Pairing failed:", e.message)
+        pairingDone = false
+      }
+    }, 3000)
+  }
+})
   sock.ev.on("creds.update", saveCreds)
 
   sock.ev.on("connection.update", (update) => {
