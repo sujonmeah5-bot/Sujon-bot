@@ -15,23 +15,13 @@ async function startBot() {
     browser: ["SUJON - BOT", "Chrome", "1.0"]
   })
 
-  let pairingRequested = true.
-
   sock.ev.on("connection.update", async (update) => {
-    const { connection, lastDisconnect } = update
+    const { connection, lastDisconnect, qr } = update
 
-    if (connection === "connecting" && !sock.authState.creds.registered && !pairingRequested) {
-      pairingRequested = true
-      setTimeout(async () => {
-        try {
-          const code = await sock.requestPairingCode(config.ownerNumber)
-          console.log("PAIRING CODE:", code)
-          console.log("Ebar code ta WhatsApp e boshau, bot ar restart hobe na!")
-        } catch (e) {
-          console.log("Pairing failed:", e.message)
-          pairingRequested = false
-        }
-      }, 3000)
+    if (qr) {
+      console.log("SCAN_QR_START")
+      console.log(qr)
+      console.log("SCAN_QR_END")
     }
 
     if (connection === "close") {
