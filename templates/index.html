@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SUJON BOT</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <div class="mark">🤖</div>
+      <div>
+        <h1>SUJON BOT</h1>
+        <p>WhatsApp Bot Dashboard</p>
+      </div>
+      <span class="pill">ONLINE APP</span>
+    </header>
+
+    <section class="panel auth">
+      <h2>Admin Login</h2>
+      <label>Admin Key</label>
+      <div class="inline">
+        <input id="adminKey" type="password"
+          placeholder="Enter Admin Key">
+        <button id="loadBtn">Connect</button>
+      </div>
+      <p id="status">Welcome to SUJON BOT!</p>
+    </section>
+
+    <section id="dashboard" class="panel hidden">
+      <h2>Bot Settings</h2>
+
+      <div class="switch-row">
+        <b>Auto Reply</b>
+        <input id="auto_reply_enabled" type="checkbox">
+      </div>
+
+      <div class="switch-row">
+        <b>Welcome Message</b>
+        <input id="welcome_enabled" type="checkbox">
+      </div>
+
+      <div class="switch-row">
+        <b>Away Message</b>
+        <input id="away_enabled" type="checkbox">
+      </div>
+
+      <label>Welcome Message</label>
+      <textarea id="welcome_text" rows="3"></textarea>
+
+      <label>Auto Reply Message</label>
+      <textarea id="auto_reply_text" rows="3"></textarea>
+
+      <label>Away Message</label>
+      <textarea id="away_text" rows="3"></textarea>
+
+      <button id="saveBtn" class="full">
+        Save Settings
+      </button>
+
+      <p id="saveStatus"></p>
+
+      <h2>Recent Activity</h2>
+      <div id="logs" class="logs"></div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
