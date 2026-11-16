@@ -1,0 +1,113 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #080d18;
+  color: #fff;
+}
+
+.wrap {
+  width: min(92%, 700px);
+  margin: 35px auto;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 25px;
+}
+
+.hero h1 {
+  margin: 0;
+  color: #ff4b78;
+}
+
+.hero p {
+  color: #aaa;
+}
+
+.mark {
+  font-size: 42px;
+}
+
+.pill {
+  margin-left: auto;
+  color: #38e69b;
+  font-size: 12px;
+}
+
+.panel {
+  background: #151d2c;
+  border: 1px solid #29364b;
+  padding: 22px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  margin-top: 0;
+  color: #ff668e;
+}
+
+label {
+  display: block;
+  margin: 16px 0 8px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 13px;
+  border-radius: 9px;
+  border: 1px solid #39465c;
+  background: #0c1422;
+  color: white;
+}
+
+button {
+  padding: 13px 20px;
+  border: 0;
+  border-radius: 9px;
+  background: #ff4778;
+  color: white;
+  font-weight: bold;
+}
+
+.inline {
+  display: flex;
+  gap: 10px;
+}
+
+.switch-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 18px 0;
+}
+
+.switch-row input {
+  width: 24px;
+}
+
+.full {
+  width: 100%;
+  margin-top: 18px;
+}
+
+.hidden {
+  display: none;
+}
+
+.logs {
+  color: #aaa;
+}
+
+@media(max-width: 480px) {
+  .inline {
+    flex-direction: column;
+  }
+}
